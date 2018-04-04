@@ -21,7 +21,7 @@ PRODUCT_PACKAGES += \
 	fatTest
 
 # for dragonboard
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
 	dragonboard \
 	parser \
 	ddrtester \
