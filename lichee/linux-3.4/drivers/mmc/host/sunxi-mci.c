@@ -2680,6 +2680,40 @@ int sunxi_mci_check_r1_ready(struct mmc_host* mmc, unsigned ms)
 }
 EXPORT_SYMBOL_GPL(sunxi_mci_check_r1_ready);
 
+/*
+ * sunxi_mci_check_r1_ready_with_id
+ *
+ * @param id mmc host id
+ * @param ms timeout in msecond
+ *
+ * Note : Add by Harry
+ */
+int sunxi_mci_check_r1_ready_with_id(int id, unsigned ms)
+{
+	struct sunxi_mmc_host *smc_host = NULL;
+	unsigned long expire = jiffies + msecs_to_jiffies(ms);
+
+	BUG_ON(id > 3);
+	BUG_ON(id < 0);
+	BUG_ON(sunxi_host[id] == NULL);
+	if (sunxi_host[id] == NULL)
+		return -1;
+	
+	smc_host = sunxi_host[id];
+	do {
+		if (!(mci_readl(smc_host, REG_STAS) & SDXC_CardDataBusy))
+			break;
+	} while (time_before(jiffies, expire));
+
+	if ((mci_readl(smc_host, REG_STAS) & SDXC_CardDataBusy)) {
+		SMC_MSG(smc_host, "wait r1 rdy %d ms timeout\n", ms);
+		return -1;
+	} else
+		return 0;
+}
+EXPORT_SYMBOL_GPL(sunxi_mci_check_r1_ready_with_id);
+
+
 static struct mmc_host_ops sunxi_mci_ops = {
 	.request	= sunxi_mci_request,
 	.set_ios	= sunxi_mci_set_ios,

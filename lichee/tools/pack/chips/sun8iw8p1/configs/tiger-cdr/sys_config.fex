@@ -515,7 +515,7 @@ lcdgamma4iep        = 22
 lcd_bl_en           = port:PB2<1><0><default><1>
 lcd_power           = ""
 
-lcd_gpio_0          = port:PB3<1><0><default><1>
+;lcd_gpio_0          = port:PB3<1><0><default><1>
 lcdd2               = port:PE04<3><0><default><default>
 lcdd3               = port:PE05<3><0><default><default>
 lcdd4               = port:PE06<3><0><default><default>
@@ -788,7 +788,7 @@ sdc_isio          = 0
 sdc_regulator     = "none"
 
 [mmc1_para]
-sdc_used          = 0
+sdc_used          = 1
 sdc_detmode       = 4
 sdc_buswidth      = 4
 sdc_clk           = port:PG00<2><1><1><default>
@@ -837,11 +837,11 @@ sdc_regulator     = "none"
 ;----------------------------------------------------------------------------------
 [usbc0]
 usb_used            = 1
-usb_port_type       = 2
+usb_port_type       = 0
 usb_detect_type     = 1
-usb_id_gpio         = port:PG4<0><1><default><default>
-usb_det_vbus_gpio   = port:PG4<0><1><default><default>
-usb_drv_vbus_gpio   = port:PG3<1><0><default><0>
+usb_id_gpio         = port:PB3<0><1><default><default>
+;usb_det_vbus_gpio   = port:PG4<0><1><default><default>
+;usb_drv_vbus_gpio   = port:PG3<1><0><default><0>
 usb_restrict_gpio   =
 usb_host_init_state = 0
 usb_restric_flag    = 0
